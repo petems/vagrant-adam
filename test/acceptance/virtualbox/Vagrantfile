@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# plugins don't seem to be auto-loaded from the bundle
+require 'vagrant-adam'
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define :ubuntu do |ubuntu|
+    ubuntu.adam.provision_url = '../../support/scripts/hello_world.sh'
+
+    ubuntu.vm.box = "precise64"
+    ubuntu.vm.box_url = "http://files.vagrantup.com/precise64.box"
+
+  end
+
+  config.vm.define :centos do |centos|
+    centos.adam.provision_url = 'https://gist.githubusercontent.com/petems/367f8119bbff011bf83e/raw/29efc24e8a0db3ce2e0452f1c23d2119146ed583/remove_requiretty.sh'
+
+    centos.vm.box = 'centos-64-x64-vbox4210-nocm'
+    centos.vm.box_url = 'http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210-nocm.box'
+
+  end
+
+
+end

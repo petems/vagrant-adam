@@ -1,0 +1,9 @@
+en:
+  vagrant_adam:
+    download:
+      downloading: "Downloading or copying pre-provision script..."
+      interrupted: "Script download was interrupted. Exiting."
+    pre_provision_script_start: |-
+        Running pre-provision script
+    pre_provision_script_finish: |-
+        Pre-provision script complete!
