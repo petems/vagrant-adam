@@ -7,7 +7,8 @@ describe VagrantPlugins::Adam::Action::PreProvisionScript do
   subject(:action) { described_class.new(app, env) }
 
   describe '#run_provision_script' do
-    context 'with no config setting' do
+    context 'with ENV defined script' do
+      before { ENV.stub(:[]).with("PRE_PROV_URL").and_return("/tmp/test.sh") }
       it { should eql [] }
     end
   end
