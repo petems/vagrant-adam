@@ -16,11 +16,11 @@ describe VagrantPlugins::Adam::Action::PreProvisionScript do
   end
 
   describe "#initialize" do
-    context 'should work on initialistion' do
-      subject { described_class.new(app, env) }
-      it { should be_a VagrantPlugins::Adam::Action::PreProvisionScript }
-    end
+    subject { described_class.new(app, env) }
+    it { should be_a VagrantPlugins::Adam::Action::PreProvisionScript }
+  end
 
+  describe "#find_provision_script" do
     context 'should get provision script location from centos.adam.provision_url config value' do
       subject { described_class.new(app, env).find_provision_script }
       it { should eql '/tmp/config.sh' }
