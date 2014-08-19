@@ -25,6 +25,10 @@ module VagrantPlugins
           recover(env)
         end
 
+        def find_provision_script
+          env_provision_url || config_provision_script_url
+        end
+
         private
 
         def windows_guest?
@@ -37,10 +41,6 @@ module VagrantPlugins
 
         def env_provision_url
           ENV['PRE_PROV_URL']
-        end
-
-        def find_provision_script
-          config_provision_script_url || env_provision_url
         end
 
         def provision_script_name
