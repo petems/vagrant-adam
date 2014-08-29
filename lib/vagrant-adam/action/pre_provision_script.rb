@@ -25,11 +25,11 @@ module VagrantPlugins
           recover(env)
         end
 
+        private
+
         def find_provision_script
           env_provision_url || config_provision_script_url
         end
-
-        private
 
         def windows_guest?
           @machine.config.vm.guest.eql?(:windows)

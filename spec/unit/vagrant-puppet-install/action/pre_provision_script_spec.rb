@@ -3,13 +3,26 @@ require 'vagrant-adam/action/pre_provision_script'
 
 describe VagrantPlugins::Adam::Action::PreProvisionScript do
   let(:app) { lambda { |env| } }
-  let(:env) { { :machine => machine, :tmp_path => ['/vagrant/'] } }
+  let(:env) { { :machine => machine, :tmp_path => ['/vagrant/'], :ui => ui } }
+  let(:ui) do
+    double('ui').tap { |ui| machine.stub(:config => config, :communicate => communicate, :info => info) }
+  end
+  let(:info) { double('info')}
   let(:vm) { true }
   let(:machine) do
-    double('machine').tap { |machine| machine.stub(:config).and_return(config) }
+    double('machine').tap { |machine| machine.stub(:config => config, :communicate => communicate) }
+  end
+  let(:communicate) do
+    double('communicate').tap { |machine| machine.stub(:upload => upload) }
+  end
+  let(:upload) do
+    double('upload')
   end
   let(:config) do
-    double('config').tap { |config| config.stub(:adam => adam) }
+    double('config').tap { |config| config.stub(:adam => adam, :vm => vm) }
+  end
+  let(:vm) do
+    double('vm').tap { |config| config.stub(:guest => 'guest') }
   end
   let(:adam) do
     double('adam').tap { |config| config.stub(:finalize! => true, :provision_url => '/tmp/config.sh') }
@@ -20,16 +33,19 @@ describe VagrantPlugins::Adam::Action::PreProvisionScript do
     it { should be_a VagrantPlugins::Adam::Action::PreProvisionScript }
   end
 
-  describe "#find_provision_script" do
-    context 'should get provision script location from centos.adam.provision_url config value' do
-      subject { described_class.new(app, env).find_provision_script }
-      it { should eql '/tmp/config.sh' }
-    end
-
-    context 'should get provision script location from ENV variable first' do
-      before { ENV.stub(:[]).with("PRE_PROV_URL").and_return("/tmp/env.sh") }
-      subject { described_class.new(app, env).find_provision_script }
-      it { should eql '/tmp/env.sh' }
+  describe "#call" do
+    context "when called" do
+      subject(:pre_provision_script) { described_class.new(app, env) }
+      before do
+        pre_provision_script.stub(:fetch_or_create_pre_provision_script) { 'foo' }
+        pre_provision_script.stub(:run_provision_script) { 'foo' }
+        allow(machine).to receive(:vagrant_env).with('', { :ui_class => '' }).and_return env
+      end
+      it "should fetch the script, then run it" do
+        pre_provision_script.should_receive(:fetch_or_create_pre_provision_script).with(env)
+        pre_provision_script.should_receive(:run_provision_script).with(env)
+        pre_provision_script.call(env)
+      end
     end
   end
 
