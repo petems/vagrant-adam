@@ -7,3 +7,6 @@ en:
         Running pre-provision script
     pre_provision_script_finish: |-
         Pre-provision script complete!
+    errors:
+      vagrant_version: |-
+        vagrant-adam plugin requires Vagrant version %{requirement}
