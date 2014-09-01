@@ -1,14 +1,14 @@
 $LOAD_PATH.unshift File.expand_path('../../../lib', __FILE__)
 
-require 'coveralls'
 require 'simplecov'
-
+require 'coveralls'
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
 ]
-SimpleCov.start
-
-Coveralls.wear!
+SimpleCov.start do
+  coverage_dir('coverage/')
+end
 
 require 'rspec/core'
 require 'vagrant-adam'
