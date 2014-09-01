@@ -33,3 +33,8 @@ RSpec.configure do |config|
   config.filter_run :focus => true
   config.run_all_when_everything_filtered = true
 end
+
+# @return [String] the path to the fixture file
+def support_path(filename)
+  File.expand_path("../../support/#{filename}", __FILE__)
+end
