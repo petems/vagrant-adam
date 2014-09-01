@@ -1,5 +1,5 @@
 require_relative '../spec_helper'
-
+#
 describe VagrantPlugins::Adam::Config do
   let(:machine) { double('machine') }
   let(:instance) { described_class.new }

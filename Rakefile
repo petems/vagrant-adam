@@ -9,7 +9,7 @@ YARD::Rake::YardocTask.new
 namespace :test do
 
   RSpec::Core::RakeTask.new(:unit) do |t|
-    t.pattern = "test/unit/**/*_spec.rb"
+    t.pattern = "spec/unit/**/*_spec.rb"
   end
 
   desc "Run acceptance tests..these actually launch Vagrant sessions."
@@ -26,7 +26,7 @@ namespace :test do
       system('vagrant box add digital_ocean https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box')
     end
 
-    all_providers = Dir["test/acceptance/*"].map{|dir| File.basename(File.expand_path(dir))}
+    all_providers = Dir["spec/acceptance/*"].map{|dir| File.basename(File.expand_path(dir))}
 
     # If a provider wasn't passed to the task run acceptance tests against
     # ALL THE PROVIDERS!
@@ -41,7 +41,7 @@ namespace :test do
       puts "Running acceptance tests against '#{provider}' provider..."
       puts "=================================================================="
 
-      Dir.chdir("test/acceptance/#{provider}") do
+      Dir.chdir("spec/acceptance/#{provider}") do
         system("vagrant destroy -f")
         system("vagrant up --provider=#{provider} --provision")
         system("vagrant destroy -f")
