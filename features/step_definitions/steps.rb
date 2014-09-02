@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   config.vm.define :ubuntu do |ubuntu|
     ubuntu.adam.provision_url = '#{provision_url}'
     ubuntu.vm.box = "precise64"
-      ubuntu.vm.box_url = "http://files.vagrantup.com/precise64.box"
+    ubuntu.vm.box_url = "http://files.vagrantup.com/precise64.box"
   end
 end
 EOS
