@@ -25,4 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "coveralls","~> 0.7.1"
   spec.add_development_dependency "guard-rspec", "~> 4.3.1"
   spec.add_development_dependency "terminal-notifier-guard", "~> 1.5.3"
+  spec.add_development_dependency "aruba", "~> 0.6.1"
+  spec.add_development_dependency "pry-byebug", "~> 1.3.3"
 end

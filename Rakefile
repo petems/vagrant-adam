@@ -2,6 +2,7 @@ require 'bundler/setup'
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
+require 'cucumber/rake/task'
 require 'yard'
 
 YARD::Rake::YardocTask.new
@@ -12,41 +13,16 @@ namespace :test do
     t.pattern = "spec/unit/**/*_spec.rb"
   end
 
-  desc "Run acceptance tests..these actually launch Vagrant sessions."
-  task :acceptance, :provider do |t, args|
+end
 
-    # ensure all required dummy boxen are installed
-    %w{ aws rackspace }.each do |provider|
-      unless system("vagrant box list | grep 'dummy\s*(#{provider})' &>/dev/null")
-        system("vagrant box add dummy https://github.com/mitchellh/vagrant-#{provider}/raw/master/dummy.box")
-      end
-    end
+namespace :features do
+  desc 'Downloads and adds vagrant box for testing.'
+  task(:bootstrap) do
+    system('bundle exec vagrant box add precise64 http://files.vagrantup.com/precise64.box')
+  end
 
-    unless system("vagrant box list | grep 'digital_ocean' &>/dev/null")
-      system('vagrant box add digital_ocean https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box')
-    end
-
-    all_providers = Dir["spec/acceptance/*"].map{|dir| File.basename(File.expand_path(dir))}
-
-    # If a provider wasn't passed to the task run acceptance tests against
-    # ALL THE PROVIDERS!
-    providers = if args[:provider] && all_providers.include?(args[:provider])
-                  [args[:provider]]
-                else
-                  all_providers
-                end
-
-    providers.each do |provider|
-      puts "=================================================================="
-      puts "Running acceptance tests against '#{provider}' provider..."
-      puts "=================================================================="
-
-      Dir.chdir("spec/acceptance/#{provider}") do
-        system("vagrant destroy -f")
-        system("vagrant up --provider=#{provider} --provision")
-        system("vagrant destroy -f")
-      end
-    end
+  Cucumber::Rake::Task.new(:run) do |t|
+    t.cucumber_opts = %w(--format pretty)
   end
 end
 
