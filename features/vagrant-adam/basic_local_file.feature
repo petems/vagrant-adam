@@ -1,3 +1,4 @@
+@no-clobber
 Feature: vagrant-adam local file
   In order to check vagrant-adam is working
   As a user

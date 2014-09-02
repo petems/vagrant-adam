@@ -1,3 +1,4 @@
+@no-clobber
 Feature: vagrant-adam validations
   In order to avoid configuration mistakes for vagrant-adam commands
   As a user
