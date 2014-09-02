@@ -8,3 +8,5 @@ ClassLength:
   Enabled: false
 MethodLength:
   Enabled: false
+LineLength:
+  Enabled: false

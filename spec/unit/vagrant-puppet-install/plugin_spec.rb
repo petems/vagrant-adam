@@ -59,7 +59,7 @@ describe VagrantPlugins::Adam::Plugin do
       end
       it 'warns as stderr' do
         $stderr.should_receive(:puts).with(err_msg)
-        subject rescue nil
+        subject rescue err_msg
       end
     end
 

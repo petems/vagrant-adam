@@ -7,6 +7,7 @@ require 'vagrant/util/downloader'
 module VagrantPlugins
   module Adam
     module Action
+      # This action uploads then runs a given script on the Vagrant environment
       class PreProvisionScript
         def initialize(app, env)
           @app = app
