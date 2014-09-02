@@ -2,6 +2,7 @@ AllCops:
   Excludes:
     - vendor/**
     - bin/**
+    - tmp/**
 Encoding:
   Enabled: false
 ClassLength:
@@ -11,4 +12,6 @@ MethodLength:
 LineLength:
   Enabled: false
 Lambda:
+  Enabled: false
+IfUnlessModifier:
   Enabled: false
