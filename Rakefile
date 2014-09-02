@@ -10,9 +10,23 @@ YARD::Rake::YardocTask.new
 namespace :test do
 
   RSpec::Core::RakeTask.new(:unit) do |t|
-    t.pattern = "spec/unit/**/*_spec.rb"
+    t.pattern = 'spec/unit/**/*_spec.rb'
   end
 
+end
+
+namespace :style do
+  require 'rubocop/rake_task'
+  desc 'Run Ruby style checks'
+  Rubocop::RakeTask.new(:ruby) do |task|
+    task.patterns = [
+      '**/*.rb',
+      '**/Vagrantfile',
+      '*.gemspec',
+      'Gemfile',
+      'Rakefile'
+    ]
+  end
 end
 
 namespace :features do
@@ -26,4 +40,4 @@ namespace :features do
   end
 end
 
-task :default => "test:unit"
+task default: 'test:unit'

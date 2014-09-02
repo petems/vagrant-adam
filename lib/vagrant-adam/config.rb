@@ -14,11 +14,11 @@ module VagrantPlugins
         @provision_url = nil if @provision_url == UNSET_VALUE
       end
 
-      def validate!(machine)
+      def validate!(_machine)
         finalize!
         errors = []
 
-        if (@provision_url != nil)
+        unless @provision_url.nil?
           unless (valid_uri? @provision_url) || (valid_file? @provision_url)
             msg = <<-EOH
 '#{ @provision_url }' is not a valid filepath or URL
@@ -38,19 +38,16 @@ module VagrantPlugins
 
       private
 
-      def valid_uri? value
-        begin
-          uri = URI.parse value
-          uri.kind_of?(URI::HTTP) or uri.kind_of?(URI::HTTPS)
-        rescue URI::InvalidURIError
-          false
-        end
+      def valid_uri?(value)
+        uri = URI.parse value
+        uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)
+      rescue URI::InvalidURIError
+        false
       end
 
-      def valid_file? value
+      def valid_file?(value)
         File.file?(value)
       end
-
     end
   end
 end

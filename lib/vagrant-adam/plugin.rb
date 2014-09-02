@@ -3,7 +3,6 @@ require_relative 'action/pre_provision_script'
 module VagrantPlugins
   module Adam
     class Plugin < Vagrant.plugin('2')
-
       VAGRANT_VERSION_REQUIREMENT = '>= 1.1.0'
 
       name 'vagrant-adam'
@@ -25,12 +24,12 @@ module VagrantPlugins
       # @raise [VagrantPlugins::ProxyConf::VagrantVersionError] if this plugin
       # is incompatible with the Vagrant version
       def self.check_vagrant_version!
-        if !check_vagrant_version(VAGRANT_VERSION_REQUIREMENT)
+        unless check_vagrant_version(VAGRANT_VERSION_REQUIREMENT)
           msg = I18n.t(
             'vagrant_adam.errors.vagrant_version',
             requirement: VAGRANT_VERSION_REQUIREMENT.inspect)
           $stderr.puts msg
-          raise msg
+          fail msg
         end
       end
 

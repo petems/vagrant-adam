@@ -8,7 +8,6 @@ module VagrantPlugins
   module Adam
     module Action
       class PreProvisionScript
-
         def initialize(app, env)
           @app = app
           @logger =
@@ -68,13 +67,13 @@ module VagrantPlugins
               provision_cmd = "sh #{provision_script_name}"
               provision_cmd << ' 2>&1'
             end
-            env[:ui].info(I18n.t("vagrant_adam.pre_provision_script_start"))
+            env[:ui].info(I18n.t('vagrant_adam.pre_provision_script_start'))
             comm.sudo(provision_cmd) do |type, data|
               if [:stderr, :stdout].include?(type)
                 env[:ui].info(data)
               end
             end
-            env[:ui].info(I18n.t("vagrant_adam.pre_provision_script_finish"))
+            env[:ui].info(I18n.t('vagrant_adam.pre_provision_script_finish'))
           end
         end
 
@@ -84,7 +83,7 @@ module VagrantPlugins
         #
         def fetch_or_create_pre_provision_script(env)
           @script_tmp_path =
-            env[:tmp_path].join("#{Time.now.to_i.to_s}-#{provision_script_name}")
+            env[:tmp_path].join("#{Time.now.to_i}-#{provision_script_name}")
 
           @logger.info("Generating provision script at: #{@script_tmp_path}")
 
@@ -119,7 +118,7 @@ module VagrantPlugins
           end
         end
 
-        def recover(env)
+        def recover(_env)
           if @script_tmp_path && File.exist?(@script_tmp_path)
             File.unlink(@script_tmp_path)
           end

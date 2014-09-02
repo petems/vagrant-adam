@@ -1,5 +1,5 @@
 unless `bundle exec vagrant box list`.include?('precise64')
-  raise 'Box is not added! Run "bundle exec rake features:bootstrap".'
+  fail 'Box is not added! Run "bundle exec rake features:bootstrap".'
 end
 
 require 'aruba/cucumber'
