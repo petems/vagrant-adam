@@ -70,7 +70,7 @@ module VagrantPlugins
             end
             env[:ui].info(I18n.t('vagrant_adam.pre_provision_script_start'))
             comm.sudo(provision_cmd) do |type, data|
-              if [:stderr, :stdout].include?(type)
+              if :stderr.include?(type) || :stdout.include?(type)
                 env[:ui].info(data)
               end
             end

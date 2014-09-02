@@ -1,4 +1,4 @@
-Given /^a Vagrantfile with a adam\.provision_url of "(.*?)"$/ do |provision_url|
+Given(/^a Vagrantfile with a adam\.provision_url of "(.*?)"$/) do |provision_url|
 
   file_content = <<EOS
 require 'vagrant-adam'
@@ -16,7 +16,7 @@ EOS
   write_file('Vagrantfile', file_content)
 end
 
-Given /^a shell file with content of "(.*?)"$/ do |script_contents|
+Given(/^a shell file with content of "(.*?)"$/) do |script_contents|
 
   file_content = <<EOS
 #!/bin/sh -e

@@ -10,3 +10,5 @@ MethodLength:
   Enabled: false
 LineLength:
   Enabled: false
+Lambda:
+  Enabled: false

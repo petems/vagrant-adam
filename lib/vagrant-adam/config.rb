@@ -2,6 +2,7 @@ require 'vagrant'
 
 module VagrantPlugins
   module Adam
+    # Config definition to validate given configuration values
     class Config < Vagrant.plugin('2', :config)
       attr_accessor :provision_url
 
