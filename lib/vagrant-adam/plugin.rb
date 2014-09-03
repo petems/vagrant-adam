@@ -1,5 +1,3 @@
-require_relative 'action/pre_provision_script'
-
 module VagrantPlugins
   module Adam
     # Plugin definition for Plugin meta-data and to check Vagrant version
@@ -37,6 +35,7 @@ module VagrantPlugins
 
       action_hook(:pre_provision_script, Plugin::ALL_ACTIONS) do |hook|
         hook.after(Vagrant::Action::Builtin::SyncedFolders, Action::PreProvisionScript)
+        require_relative 'action/pre_provision_script'
       end
 
       config(:adam) do
