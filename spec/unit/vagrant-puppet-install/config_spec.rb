@@ -12,17 +12,28 @@ describe VagrantPlugins::Adam::Config do
   end
 
   describe 'defaults' do
-    its(:provision_url) { should be_nil }
+    describe '#provision_url' do
+      subject { super().provision_url }
+      it { should be_nil }
+    end
   end
 
   describe 'setting `provision_url` as a url' do
     let(:provision_url) { 'http://somepath.com/install.sh' }
-    its(:provision_url) { should eq('http://somepath.com/install.sh') }
+
+    describe '#provision_url' do
+      subject { super().provision_url }
+      it { should eq('http://somepath.com/install.sh') }
+    end
   end
 
   describe 'setting `provision_url` as a url' do
     let(:provision_url) { '/tmp/cool_script.sh' }
-    its(:provision_url) { should eq('/tmp/cool_script.sh') }
+
+    describe '#provision_url' do
+      subject { super().provision_url }
+      it { should eq('/tmp/cool_script.sh') }
+    end
   end
 
   describe 'validate' do

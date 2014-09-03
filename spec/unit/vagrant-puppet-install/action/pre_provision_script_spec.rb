@@ -37,8 +37,8 @@ describe VagrantPlugins::Adam::Action::PreProvisionScript do
     context 'when called' do
       subject(:pre_provision_script) { described_class.new(app, env) }
       it 'should fetch the script, then run it' do
-        pre_provision_script.should_receive(:fetch_or_create_pre_provision_script).with(env)
-        pre_provision_script.should_receive(:run_provision_script).with(env)
+        expect(pre_provision_script).to receive(:fetch_or_create_pre_provision_script).with(env)
+        expect(pre_provision_script).to receive(:run_provision_script).with(env)
         pre_provision_script.call(env)
       end
     end

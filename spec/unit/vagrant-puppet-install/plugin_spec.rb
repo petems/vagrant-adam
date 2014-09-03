@@ -51,7 +51,7 @@ describe VagrantPlugins::Adam::Plugin do
         'VagrantPlugins::ProxyConf::Plugin::VAGRANT_VERSION_REQUIREMENT',
         requirement)
       stub_const('Vagrant::VERSION', vagrant_version)
-      $stderr.stub(:puts)
+      allow($stderr).to receive(:puts)
     end
 
     context 'on too old Vagrant version' do
@@ -60,7 +60,7 @@ describe VagrantPlugins::Adam::Plugin do
         expect { subject }.to raise_error(err_msg)
       end
       it 'warns as stderr' do
-        $stderr.should_receive(:puts).with(err_msg)
+        expect($stderr).to receive(:puts).with(err_msg)
         expect { subject }.to raise_error(err_msg)
       end
     end
