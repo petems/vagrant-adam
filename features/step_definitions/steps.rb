@@ -16,7 +16,7 @@ EOS
   write_file('Vagrantfile', file_content)
 end
 
-Given(/^a shell file with content of "(.*?)"$/) do |script_contents|
+Given(/^a shell file '(.*?)' with content of "(.*?)"$/) do |script_name, script_contents|
 
   file_content = <<EOS
 #!/bin/sh -e
@@ -24,5 +24,5 @@ Given(/^a shell file with content of "(.*?)"$/) do |script_contents|
 EOS
 
   # Create file
-  write_file('script.sh', file_content)
+  write_file(script_name, file_content)
 end
