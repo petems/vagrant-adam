@@ -7,6 +7,7 @@ group :development do
   # gem dependency because we expect to be installed within the
   # Vagrant environment itself using `vagrant plugin`.
   gem 'vagrant', git: 'git://github.com/mitchellh/vagrant.git', tag: 'v1.4.3'
+  gem 'cucumber', git: 'https://github.com/cucumber/cucumber.git', tag: 'v2.0.0.beta.2'
 end
 
 group :acceptance do
