@@ -32,7 +32,11 @@ end
 namespace :features do
   desc 'Downloads and adds vagrant box for testing.'
   task(:bootstrap) do
-    system('bundle exec vagrant box add precise64 http://files.vagrantup.com/precise64.box')
+    if `bundle exec vagrant box list`.include?('precise64.box')
+      puts 'precise64 box found! No bootstrap needed.'
+    else
+      system('bundle exec vagrant box add precise64 http://files.vagrantup.com/precise64.box')
+    end
   end
 
   Cucumber::Rake::Task.new(:run) do |t|
