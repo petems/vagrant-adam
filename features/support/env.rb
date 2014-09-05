@@ -3,7 +3,9 @@ unless `bundle exec vagrant box list`.include?('precise64')
 end
 
 require 'aruba/cucumber'
-ENV['VAGRANT_LOG'] = 'info'
+
+# Useful for debugging Vagrant issues
+# ENV['VAGRANT_LOG'] = 'info'
 
 Before do
   system 'cd tmp/aruba; bundle exec vagrant destroy -f'
