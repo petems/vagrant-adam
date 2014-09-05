@@ -36,7 +36,7 @@ namespace :features do
   end
 
   Cucumber::Rake::Task.new(:run) do |t|
-    t.cucumber_opts = %w(--format pretty)
+    t.cucumber_opts = %w(--format pretty --order random)
   end
 end
 
