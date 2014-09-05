@@ -27,6 +27,22 @@ EOS
   write_file(script_name, file_content)
 end
 
+Given(/^a Vagrantfile with no adam\.provision_url$/) do
+    file_content = <<EOS
+require 'vagrant-adam'
+
+Vagrant.configure("2") do |config|
+  config.vm.define :ubuntu do |ubuntu|
+    ubuntu.vm.box = "precise64"
+    ubuntu.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  end
+end
+EOS
+
+  # Create file
+  write_file('Vagrantfile', file_content)
+end
+
 Given /^the environment variable (.+) is nil$/ do |variable|
   set_env(variable, nil)
 end
