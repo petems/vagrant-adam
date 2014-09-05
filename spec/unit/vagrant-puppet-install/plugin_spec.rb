@@ -7,7 +7,7 @@ describe VagrantPlugins::Adam::Plugin do
     let(:fake_class) { Class.new }
 
     it 'should hook PreProvisionScript before SyncedFolders' do
-      stub_const("VagrantPlugins::Omnibus::Action::InstallChef", fake_class)
+      stub_const('VagrantPlugins::Omnibus::Action::InstallChef', fake_class)
       hook_proc = described_class.components.action_hooks[:__all_actions__][0]
       hook = double
       expect(hook).to receive(:after).with(Vagrant::Action::Builtin::SyncedFolders, VagrantPlugins::Adam::Action::PreProvisionScript)

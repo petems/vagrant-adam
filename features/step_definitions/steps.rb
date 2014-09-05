@@ -28,7 +28,7 @@ EOS
 end
 
 Given(/^a Vagrantfile with no adam\.provision_url$/) do
-    file_content = <<EOS
+  file_content = <<EOS
 require 'vagrant-adam'
 
 Vagrant.configure("2") do |config|
@@ -43,10 +43,10 @@ EOS
   write_file('Vagrantfile', file_content)
 end
 
-Given /^the environment variable (.+) is nil$/ do |variable|
+Given(/^the environment variable (.+) is nil$/) do |variable|
   set_env(variable, nil)
 end
 
-Given /^the environment variable (.+) is "(.+)"$/ do |variable, value|
+Given(/^the environment variable (.+) is "(.+)"$/) do |variable, value|
   set_env(variable, value)
 end
