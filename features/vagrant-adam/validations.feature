@@ -15,3 +15,10 @@ Feature: vagrant-adam validations
     When I run `bundle exec vagrant up`
     Then the exit status should not be 0
     And the output should contain "Couldn't open file /tmp/foo_bar_baz.sh"
+
+  Scenario:
+    Given a Vagrantfile with no adam.provision_url
+    And the environment variable PRE_PROV_URL is "/tmp/foo_bar_baz.sh"
+    When I run `bundle exec vagrant up`
+    Then the exit status should not be 0
+    And the output should contain "Couldn't open file /tmp/foo_bar_baz.sh"
