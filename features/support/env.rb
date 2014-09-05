@@ -7,6 +7,7 @@ ENV['VAGRANT_LOG'] = 'info'
 
 Before do
   system 'cd tmp/aruba; bundle exec vagrant destroy -f'
+  system 'cd tmp/aruba; rm -rf *.sh'
   # VM start takes a long time
   @aruba_timeout_seconds = 180
 end
@@ -14,4 +15,5 @@ end
 After do
   # halt VM
   system 'cd tmp/aruba; bundle exec vagrant destroy -f'
+  system 'cd tmp/aruba; rm -rf *.sh'
 end
