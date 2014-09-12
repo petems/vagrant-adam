@@ -36,6 +36,7 @@ module VagrantPlugins
       action_hook(:pre_provision_script, Plugin::ALL_ACTIONS) do |hook|
         require_relative 'action/pre_provision_script'
         hook.after(Vagrant::Action::Builtin::SyncedFolders, Action::PreProvisionScript)
+        hook.after(Vagrant::Action::Builtin::Provision, Action::PreProvisionScript)
       end
 
       config(:adam) do
