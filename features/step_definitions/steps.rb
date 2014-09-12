@@ -54,3 +54,8 @@ end
 Given(/^the Vagrant box is already running$/) do
   run_simple('bundle exec vagrant up')
 end
+
+Given(/^the provision output should contain "(.*?)"$/) do |expected_provision_output|
+  run_simple('bundle exec vagrant provision')
+  expect(output_from('bundle exec vagrant provision')).to include(expected_provision_output)
+end

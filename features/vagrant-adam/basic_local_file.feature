@@ -22,6 +22,4 @@ Feature: vagrant-adam local file
     Given a Vagrantfile with a adam.provision_url of "./hello_world_local_file.sh"
     And a shell file 'hello_world_local_file.sh' with content of "echo 'Hello World!'"
     And the Vagrant box is already running
-    When I run `bundle exec vagrant provision`
-    Then the exit status should not be 1
-    And the output should contain "Hello World"
+    Then the provision output should contain "Hello World"

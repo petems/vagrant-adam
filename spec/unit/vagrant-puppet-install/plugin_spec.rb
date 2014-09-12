@@ -11,6 +11,7 @@ describe VagrantPlugins::Adam::Plugin do
       hook_proc = described_class.components.action_hooks[:__all_actions__][0]
       hook = double
       expect(hook).to receive(:after).with(Vagrant::Action::Builtin::SyncedFolders, VagrantPlugins::Adam::Action::PreProvisionScript)
+      expect(hook).to receive(:after).with(Vagrant::Action::Builtin::Provision, VagrantPlugins::Adam::Action::PreProvisionScript)
       hook_proc.call(hook)
     end
   end
