@@ -17,3 +17,11 @@ Feature: vagrant-adam local file
     When I run `bundle exec vagrant up`
     Then the exit status should not be 0
     And the output should contain "Syntax error: Unterminated quoted string"
+
+  Scenario:
+    Given a Vagrantfile with a adam.provision_url of "./hello_world_local_file.sh"
+    And a shell file 'hello_world_local_file.sh' with content of "echo 'Hello World!'"
+    And the Vagrant box is already running
+    When I run `bundle exec vagrant provision`
+    Then the exit status should not be 1
+    And the output should contain "Hello World"

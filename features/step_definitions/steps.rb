@@ -50,3 +50,7 @@ end
 Given(/^the environment variable (.+) is "(.+)"$/) do |variable, value|
   set_env(variable, value)
 end
+
+Given(/^the Vagrant box is already running$/) do
+  run_simple('bundle exec vagrant up')
+end
