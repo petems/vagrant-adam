@@ -1,6 +1,6 @@
 module VagrantPlugins
   # Define version for Gem here
   module Adam
-    VERSION = '0.1.0'
+    VERSION = '0.1.0a'
   end
 end
