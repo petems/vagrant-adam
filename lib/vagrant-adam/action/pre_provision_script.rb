@@ -28,7 +28,7 @@ module VagrantPlugins
         private
 
         def find_provision_script
-          env_provision_url || config_provision_script_url
+          config_provision_script_url || env_provision_url
         end
 
         def windows_guest?
