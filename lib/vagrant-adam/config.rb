@@ -21,10 +21,18 @@ module VagrantPlugins
 
         unless @provision_url.nil?
           unless (valid_uri? @provision_url) || (valid_file? @provision_url)
-            msg = <<-EOH
-'#{ @provision_url }' is not a valid filepath or URL
-            EOH
-            errors << msg
+            unless (valid_uri? @provision_url)
+              msg = <<-EOH
+  '#{ @provision_url }' is not a valid URL
+              EOH
+              errors << msg
+            end
+            unless (valid_file? @provision_url)
+              msg = <<-EOH
+  File '#{ @provision_url }' could not be found.
+              EOH
+              errors << msg
+            end
           end
         end
 
