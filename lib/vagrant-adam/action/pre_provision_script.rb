@@ -20,6 +20,7 @@ module VagrantPlugins
 
         def call(env)
           @app.call(env)
+
           return unless @machine.communicate.ready? && provision_enabled?(env)
 
           # Perform delayed validation
