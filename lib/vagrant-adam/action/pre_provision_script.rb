@@ -25,9 +25,11 @@ module VagrantPlugins
           # Perform delayed validation
           @machine.config.adam.validate!(@machine)
 
-          fetch_or_create_pre_provision_script(env)
-          run_provision_script(env)
-          recover(env)
+          unless @provision_script.nil?
+            fetch_or_create_pre_provision_script(env)
+            run_provision_script(env)
+            recover(env)
+          end
         end
 
         private
