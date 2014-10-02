@@ -20,6 +20,7 @@ module VagrantPlugins
 
         def call(env)
           @app.call(env)
+          return unless @machine.communicate.ready? && provision_enabled?(env)
           fetch_or_create_pre_provision_script(env)
           run_provision_script(env)
           recover(env)
