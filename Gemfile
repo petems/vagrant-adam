@@ -8,6 +8,7 @@ group :development do
   # Vagrant environment itself using `vagrant plugin`.
   gem 'vagrant', git: 'git://github.com/mitchellh/vagrant.git', tag: 'v1.4.3'
   gem 'cucumber', git: 'https://github.com/cucumber/cucumber.git', tag: 'v2.0.0.beta.2'
+  gem 'cucumber-core', git: 'https://github.com/cucumber/cucumber-core.git', tag: 'v1.0.0.beta.2'
 end
 
 group :acceptance do
