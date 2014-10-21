@@ -1,6 +1,5 @@
 require 'log4r'
 require 'shellwords'
-require 'fog'
 
 require 'vagrant/util/downloader'
 
